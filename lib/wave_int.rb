@@ -2,16 +2,28 @@ require "wave_int/version"
 
 class WaveInt
   # Set WaveInt Range.
-  def initialize(max, min=0)
-    @max = max - min
-    @cycle = @max * 2
-    @offset = min
+  def initialize(limit1, limit2=0)
+    @min, @max = [limit1.to_i, limit2.to_i].sort
+    @v = @min
   end
 
-  # Get WaveInt Value.
-  def value(number)
-    n = (number - @offset) % (@cycle)
-    v = n > @max ? (@cycle) - n : n
-    v + @offset
+  # Get WaveInt Value.(default: return last value)
+  def value(number = @v)
+    n = (number.to_i - offset) % (cycle)
+    @v = offset + (n < wave_max ? n : cycle - n)
+    @v
+  end
+
+  private
+  def offset
+    @min
+  end
+
+  def wave_max
+    @max - @min
+  end
+
+  def cycle
+    wave_max * 2
   end
 end
