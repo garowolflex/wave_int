@@ -1,8 +1,6 @@
 # WaveInt
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/wave_int`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+WaveInt 
 
 ## Installation
 
@@ -22,7 +20,21 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+For example, get wave value from -2 to 2
+
+```ruby
+wave = WaveInt.new(-2, 2)
+wave_array = 10.times.map {|v| wave.value(v) }
+#=> [0, 1, 2, 1, 0, -1, -2, -1, 0, 1]
+```
+
+The order of parameters is redundant, and second parameter can be omit(default: 0).
+
+```ruby
+wave = WaveInt.new(3)
+wave_array = 8.times.map {|V| wave.value(v) }
+#=> [0, 1, 2, 3, 2, 1, 0, 8]
+```
 
 ## Development
 
