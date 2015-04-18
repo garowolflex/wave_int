@@ -66,16 +66,40 @@ describe WaveInt do
         expect(wave1.value(max + (max - min))).to be min
         expect(wave1.value(max + (max - min) + 1)).to be min + 1
         expect(wave1.value(0)).to be 0
+        expect(wave1.value(min - 1)).to be min + 1
       end
     end
+  end
 
-    context 'when omit parameter' do
-      it 'return last value' do
-        wave = WaveInt.new(10)
-        [3, 13, 235, -230].each do |v|
-          last = wave.value(v)
-          expect(wave.value).to be last
-        end
+  describe 'WaveInt#add' do
+    it 'increase by specified number, and return increased value' do
+      max = 10
+      step_val = 3
+      wave = WaveInt.new(max)
+      expect(wave.add(step_val)).to be step_val
+      expect(wave.add(max - step_val)).to be max
+      expect(wave.add(step_val)).to be max - step_val
+      expect(wave.add(-step_val)).to be max
+    end
+  end
+
+  describe 'WaveInt controll value in the Range' do
+    it '#set_value return specified number in the Range, and move basepoint' do
+      min = -100
+      max = 100
+      wave = WaveInt.new(min, max)
+      expect(wave.set_value(min - 1)).to be min + 1
+      expect(wave.add(1)).to be min
+      expect(wave.add(1)).to be min + 1
+      expect(wave.set_value(max)).to be max
+      expect(wave.add(10)).to be max - 10
+    end
+
+    it '#value return last value when omit parameter' do
+      wave = WaveInt.new(10)
+      [3, 13, 235, -230].each do |v|
+        last = wave.add(v)
+        expect(wave.value).to be last
       end
     end
   end
