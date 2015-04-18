@@ -1,6 +1,6 @@
 # WaveInt
 
-WaveInt 
+WaveInt class generate linear gradient value in the range. 
 
 ## Installation
 
@@ -20,20 +20,40 @@ Or install it yourself as:
 
 ## Usage
 
-For example, get wave value from -2 to 2
+For example, get wave value from -10 to 10
 
 ```ruby
-wave = WaveInt.new(-2, 2)
-wave_array = 10.times.map {|v| wave.value(v) }
-#=> [0, 1, 2, 1, 0, -1, -2, -1, 0, 1]
+wave = WaveInt.new(-10, 10)
+wave.value(9)  #=> 9
+wave.value(10) #=> 10
+wave.value(11) #=> 9
+wave.value(20) #=> 0
+wave.value(21) #=> -1
+wave.value(30) #=> -10
+wave.value(31) #=> -9
 ```
 
 The order of parameters is redundant, and second parameter can be omit(default: 0).
 
 ```ruby
-wave = WaveInt.new(3)
-wave_array = 8.times.map {|V| wave.value(v) }
-#=> [0, 1, 2, 3, 2, 1, 0, 8]
+wave = WaveInt.new(5)
+wave_array = 8.times.map {|v| wave.value(v) }
+#=> [0, 1, 2, 3, 4, 5, 4, 3]
+```
+
+More simply, wave controll with repeat,
+use WaveInt#set_value and WaveInt#add.
+
+```ruby
+wave = WaveInt.new(5, -2)
+wave_array = 8.times.map {|v| wave.add(3) }
+#=> [3, 4, 1, -2, 1, 4, 3, 0]
+
+# if you need reset(or set start value), use set_value.
+wave.set_value(0)
+wave.add(2) #=> 2
+wave.set_value(5)
+wave.add(6) #=> -1
 ```
 
 ## Development

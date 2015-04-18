@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{Generate linear gradient value.}
   spec.description   = %q{WaveInt class Generate linear gradient value in the range.}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/garowolflex/wave_int"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
